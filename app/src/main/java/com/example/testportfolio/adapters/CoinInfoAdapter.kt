@@ -43,17 +43,16 @@ class CoinInfoAdapter : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>
 
     override fun getItemCount() = coinPriceInfoList.size
 
-    inner class CoinInfoViewHolder(private val binding: ItemCoinInfoBinding) :
+    inner class CoinInfoViewHolder(binding: ItemCoinInfoBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        //        fun bind(coin: CoinPriceInfo) {
-//            with(binding) {
-        val ivCoinLogo = binding.ivCoinLogo
-        val tvSymbols = binding.tvSymbols
-        val tvPrice = binding.tvPrice
-        val tvLastUpdate = binding.tvLastUpdate
-//            }
-//    }
+
+            val ivCoinLogo = binding.ivCoinLogo
+            val tvSymbols = binding.tvSymbols
+            val tvPrice = binding.tvPrice
+            val tvLastUpdate = binding.tvLastUpdate
+
     }
 }
+
 
 
