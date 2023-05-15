@@ -1,12 +1,15 @@
 package com.example.testportfolio.api
 
+import androidx.annotation.NonNull
 import com.example.testportfolio.pojo.CoinInfoListOfData
-import com.example.testportfolio.pojo.CoinPricaInfoRawData
+import com.example.testportfolio.pojo.CoinPriceInfoRawData
 import io.reactivex.rxjava3.core.Single
+import org.jetbrains.annotations.NonNls
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface ApiService {
+
 
     @GET("top/totalvolfull")
     fun getTopCoinsInfo(
@@ -20,7 +23,7 @@ interface ApiService {
         @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY,
         @Query(QUERY_PARAM_TO_SYMBOLS) fsyms: String,
         @Query(QUERY_PARAM_FROM_SYMBOLS) tsyms: String = CURRENCY,
-    ): Single<CoinPricaInfoRawData>
+    ): Single<CoinPriceInfoRawData>
 
     companion object {
         private const val QUERY_PARAM_API_KEY = "api_key"
