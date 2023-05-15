@@ -5,19 +5,23 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.testportfolio.adapters.CoinInfoAdapter
+import com.example.testportfolio.databinding.ActivityCoinPriceListBinding
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.activity_coin_price_list.rvoCoinPriceList
+
 
 class CoinPriceListActivity : AppCompatActivity() {
 
     private lateinit var viewModel: CoinViewModel
-    private val compositeDisposable = CompositeDisposable()
+    private lateinit var binding: ActivityCoinPriceListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coin_price_list)
         val adapter = CoinInfoAdapter()
-        rvoCoinPriceList.adapter = adapter
+        binding = ActivityCoinPriceListBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+        binding.rvoCoinPriceList.adapter = adapter
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         viewModel.priceList.observe(this) {
            adapter.coinPriceInfoList = it
