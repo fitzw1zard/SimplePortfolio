@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TestPortfolio</string>
+    <string name="coin_logo">CoinLogo</string>
 </resources>

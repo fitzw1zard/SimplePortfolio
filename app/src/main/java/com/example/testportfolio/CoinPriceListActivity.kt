@@ -4,26 +4,25 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.testportfolio.api.ApiFactory
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import com.example.testportfolio.adapters.CoinInfoAdapter
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import kotlinx.android.synthetic.main.activity_coin_price_list.rvoCoinPriceList
 
-class MainActivity : AppCompatActivity() {
+class CoinPriceListActivity : AppCompatActivity() {
 
     private lateinit var viewModel: CoinViewModel
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_coin_price_list)
+        val adapter = CoinInfoAdapter()
+        rvoCoinPriceList.adapter = adapter
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-//        viewModel.priceList.observe(this) {
-//            Log.d("TEST_OF_LOADING", "Success in Activity: $it")
-//        }
-        viewModel.getDetailInfo("BTC").observe(this) {
-            Log.d("TEST_OF_LOADING", "Success in Activity: $it")
+        viewModel.priceList.observe(this) {
+           adapter.coinPriceInfoList = it
         }
+
 
 
     }
