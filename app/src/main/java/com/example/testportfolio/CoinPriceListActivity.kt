@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.testportfolio.adapters.CoinInfoAdapter
 import com.example.testportfolio.databinding.ActivityCoinPriceListBinding
-import io.reactivex.rxjava3.disposables.CompositeDisposable
+import com.example.testportfolio.pojo.CoinPriceInfo
 
 
 class CoinPriceListActivity : AppCompatActivity() {
@@ -17,7 +17,12 @@ class CoinPriceListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_coin_price_list)
-        val adapter = CoinInfoAdapter()
+        val adapter = CoinInfoAdapter(this)
+        adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
+            override fun onCoinClick(coinPriceInfo: CoinPriceInfo) {
+                Log.d("ON_CLICK_TEST", "Click: ${coinPriceInfo.fromSymbol}")
+            }
+        }
         binding = ActivityCoinPriceListBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
