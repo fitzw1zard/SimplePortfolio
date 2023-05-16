@@ -31,7 +31,7 @@ interface ApiService {
         private const val QUERY_PARAM_TO_SYMBOLS = "tsyms"
 
         private const val CURRENCY = "USD"
-        private const val API_KEY = ${{ secrets.API_KEY}}
+        private const val API_KEY = "9a17a761bd231f80531025d3592eea6e70741aac85e8450a1b1c3def7d97cff9"
 
     }
 }
