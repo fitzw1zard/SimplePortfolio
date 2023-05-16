@@ -1,7 +1,6 @@
 package com.example.testportfolio
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.testportfolio.adapters.CoinInfoAdapter
@@ -20,7 +19,12 @@ class CoinPriceListActivity : AppCompatActivity() {
         val adapter = CoinInfoAdapter(this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
             override fun onCoinClick(coinPriceInfo: CoinPriceInfo) {
-                Log.d("ON_CLICK_TEST", "Click: ${coinPriceInfo.fromSymbol}")
+                startActivity(
+                    CoinDetailActivity.newIntent(
+                        this@CoinPriceListActivity,
+                        coinPriceInfo.fromSymbol
+                    )
+                )
             }
         }
         binding = ActivityCoinPriceListBinding.inflate(layoutInflater)
@@ -29,9 +33,8 @@ class CoinPriceListActivity : AppCompatActivity() {
         binding.rvoCoinPriceList.adapter = adapter
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         viewModel.priceList.observe(this) {
-           adapter.coinPriceInfoList = it
+            adapter.coinPriceInfoList = it
         }
-
 
 
     }
