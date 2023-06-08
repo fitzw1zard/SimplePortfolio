@@ -28,7 +28,7 @@ class CoinDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         val fromSymbol = intent.getStringExtra(EXTRA_FROM_SYMBOL).orEmpty()
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-        viewModel.getDetailInfo(fromSymbol).observe(this, Observer {
+        viewModel.getDetailInfo(fromSymbol).observe(this) {
             with(binding) {
                 Picasso.get().load(it.imageUrl).into(ivCoinLogo)
                 tvFromSymbol.text = it.fromSymbol
@@ -39,7 +39,7 @@ class CoinDetailActivity : AppCompatActivity() {
                 tvLastDealSet.text = it.lastMarket
                 tvLastUpdateSet.text = it.lastUpdate
             }
-        })
+        }
     }
 
     companion object {

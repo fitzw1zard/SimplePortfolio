@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         coinInfoAdapter = CoinInfoAdapter(this)
         binding.rvoCoinPriceList.adapter = coinInfoAdapter
+        binding.rvoCoinPriceList.itemAnimator = null
         setupClickListener()
     }
 
