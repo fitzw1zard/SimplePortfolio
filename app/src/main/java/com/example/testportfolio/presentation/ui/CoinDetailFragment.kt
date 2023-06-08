@@ -43,9 +43,9 @@ class CoinDetailFragment : Fragment() {
             with(binding) {
                 tvFromSymbol.text = it.fromSymbol
                 tvToSymbol.text = it.toSymbol
-                tvPriceSet.text = it.price.toString()
-                tvMinSet.text = it.lowDay.toString()
-                tvMaxSet.text = it.highDay.toString()
+                tvPriceSet.text = it.price.toString().take(10)
+                tvMinSet.text = it.lowDay.toString().take(10)
+                tvMaxSet.text = it.highDay.toString().take(10)
                 tvLastDealSet.text = it.lastMarket
                 tvLastUpdateSet.text = it.lastUpdate
                 Picasso.get().load(it.imageUrl).into(ivCoinLogo)
@@ -53,6 +53,8 @@ class CoinDetailFragment : Fragment() {
             }
         }
     }
+
+
 
 
     override fun onDestroyView() {

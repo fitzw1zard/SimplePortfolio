@@ -36,7 +36,7 @@ class CoinRepositoryImpl(
         while (true) {
 
             try {
-                val topCoins = apiService.getTopCoinsInfo(limit = 50)
+                val topCoins = apiService.getTopCoinsInfo()
                 val fsyms = mapper.mapNamesListToString(topCoins)
                 val jsonContainer = apiService.getFullPriceList(fsyms = fsyms)
                 val coinInfoDtoList = mapper.mapJsonContainerToListCoinInfo(jsonContainer)

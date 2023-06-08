@@ -51,7 +51,7 @@ class CoinMapper {
     fun mapDbModelToEntity(dbModel: CoinInfoDbModel) = CoinInfo(
         fromSymbol = dbModel.fromSymbol,
         toSymbol = dbModel.toSymbol,
-        price = dbModel.price,
+        price = trim(dbModel.price!!),
         lastUpdate = convertTimestampToTime(dbModel.lastUpdate),
         highDay = dbModel.highDay,
         lowDay = dbModel.lowDay,
@@ -65,8 +65,12 @@ class CoinMapper {
             mapDbModelToEntity(it)
         }
 
+    private fun trim(inputString: String): String {
+        return inputString.take(18)
+    }
+
     private fun convertTimestampToTime(timestamp: Long?): String {
-        if (timestamp == null ) return ""
+        if (timestamp == null) return ""
         val stamp = Date(Timestamp(timestamp * 1000).time)
         val sdf = java.text.SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         sdf.timeZone = java.util.TimeZone.getDefault()
