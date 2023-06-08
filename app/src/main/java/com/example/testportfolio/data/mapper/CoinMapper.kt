@@ -1,11 +1,15 @@
 package com.example.testportfolio.data.mapper
 
 import com.example.testportfolio.data.database.CoinInfoDbModel
+import com.example.testportfolio.data.network.ApiFactory.BASE_IMAGE_URL
 import com.example.testportfolio.data.network.model.CoinInfoDto
 import com.example.testportfolio.data.network.model.CoinInfoJsonContainerDto
 import com.example.testportfolio.data.network.model.CoinNamesDto
 import com.example.testportfolio.domain.entity.CoinInfo
 import com.google.gson.Gson
+import java.sql.Date
+import java.sql.Timestamp
+import java.util.Locale
 
 class CoinMapper {
 
@@ -18,7 +22,7 @@ class CoinMapper {
         lowDay = dto.lowDay,
         lastMarket = dto.lastMarket,
         volumeDayTo = dto.volumeDayTo,
-        imageUrl = dto.imageUrl
+        imageUrl = BASE_IMAGE_URL + dto.imageUrl
     )
 
     fun mapJsonContainerToListCoinInfo(jsonContainer: CoinInfoJsonContainerDto): List<CoinInfoDto> {
@@ -48,7 +52,7 @@ class CoinMapper {
         fromSymbol = dbModel.fromSymbol,
         toSymbol = dbModel.toSymbol,
         price = dbModel.price,
-        lastUpdate = dbModel.lastUpdate,
+        lastUpdate = convertTimestampToTime(dbModel.lastUpdate),
         highDay = dbModel.highDay,
         lowDay = dbModel.lowDay,
         lastMarket = dbModel.lastMarket,
@@ -60,6 +64,14 @@ class CoinMapper {
         dbModelList.map {
             mapDbModelToEntity(it)
         }
+
+    private fun convertTimestampToTime(timestamp: Long?): String {
+        if (timestamp == null ) return ""
+        val stamp = Date(Timestamp(timestamp * 1000).time)
+        val sdf = java.text.SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        sdf.timeZone = java.util.TimeZone.getDefault()
+        return sdf.format(stamp)
+    }
 
 
 }

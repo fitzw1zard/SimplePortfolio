@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testportfolio.R
-import com.example.testportfolio.data.network.ApiFactory.BASE_IMAGE_URL
 import com.example.testportfolio.databinding.ItemCoinInfoBinding
 import com.example.testportfolio.domain.entity.CoinInfo
-import com.example.testportfolio.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 
@@ -37,16 +35,14 @@ class CoinInfoAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: CoinInfoViewHolder, position: Int) {
         val coin = coinInfoDtoList[position]
-        Log.d("CallAdapter", "onBindViewHolder")
         val symbolsTemplate = context.resources.getString(R.string.symbols_template)
         val lastUpdateTemplate = context.resources.getString(R.string.last_update_template)
         with(holder) {
-
-            with(coin) { 0
+            with(coin) {
             tvSymbols.text = String.format(symbolsTemplate, fromSymbol, toSymbol)
             tvPrice.text = price
-            tvLastUpdate.text = String.format(lastUpdateTemplate, convertTimestampToTime(lastUpdate))
-            Picasso.get().load(BASE_IMAGE_URL + imageUrl).into(ivCoinLogo)
+            tvLastUpdate.text = String.format(lastUpdateTemplate, lastUpdate)
+            Picasso.get().load(imageUrl).into(ivCoinLogo)
             itemView.setOnClickListener {
                 onCoinClickListener?.onCoinClick(this)
             }}
