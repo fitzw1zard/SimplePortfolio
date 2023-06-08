@@ -25,8 +25,7 @@ class CoinDetailActivity : AppCompatActivity() {
             return
         }
         binding = ActivityCoinDetailBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(binding.root)
         val fromSymbol = intent.getStringExtra(EXTRA_FROM_SYMBOL).orEmpty()
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         viewModel.getDetailInfo(fromSymbol).observe(this, Observer {
