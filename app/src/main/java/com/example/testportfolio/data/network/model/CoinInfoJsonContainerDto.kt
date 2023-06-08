@@ -1,11 +1,11 @@
-package com.example.testportfolio.data.model
+package com.example.testportfolio.data.network.model
 
 import com.google.gson.JsonObject
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class CoinPriceInfoRawData(
+data class CoinInfoJsonContainerDto(
     @SerializedName("RAW")
     @Expose
-    val coinPriceInfoJsonObj: JsonObject? = null
+    val json: JsonObject? = null
 )

@@ -8,8 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.testportfolio.R
+import com.example.testportfolio.data.network.ApiFactory.BASE_IMAGE_URL
 import com.example.testportfolio.databinding.ActivityCoinDetailBinding
 import com.example.testportfolio.presentation.viewmodel.CoinViewModel
+import com.example.testportfolio.utils.convertTimestampToTime
+import com.squareup.picasso.Picasso
 
 
 class CoinDetailActivity : AppCompatActivity() {
@@ -27,17 +30,18 @@ class CoinDetailActivity : AppCompatActivity() {
         binding = ActivityCoinDetailBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        val fromSymbol = intent.getStringExtra(EXTRA_FROM_SYMBOL).toString()
+        val fromSymbol = intent.getStringExtra(EXTRA_FROM_SYMBOL).orEmpty()
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         viewModel.getDetailInfo(fromSymbol).observe(this, Observer {
             with(binding) {
+                Picasso.get().load(BASE_IMAGE_URL + it.imageUrl).into(ivCoinLogo)
                 tvFromSymbol.text = it.fromSymbol
                 tvToSymbol.text = it.toSymbol
                 tvPriceSet.text = it.price.toString()
                 tvMinSet.text = it.lowDay.toString()
                 tvMaxSet.text = it.highDay.toString()
                 tvLastDealSet.text = it.lastMarket
-                tvLastUpdateSet.text = it.getFormattedTime()
+                tvLastUpdateSet.text = convertTimestampToTime(it.lastUpdate)
             }
         })
     }

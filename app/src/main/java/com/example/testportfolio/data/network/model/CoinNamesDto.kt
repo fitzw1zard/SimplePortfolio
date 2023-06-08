@@ -1,10 +1,10 @@
-package com.example.testportfolio.data.model
+package com.example.testportfolio.data.network.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class CoinInfoListOfData(
+data class CoinNamesDto(
     @SerializedName("Data")
     @Expose
-    val data: List<Datum>? = null
+    val names: List<CoinNameContainerDto>? = null
 )

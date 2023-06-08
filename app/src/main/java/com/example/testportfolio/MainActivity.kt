@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.testportfolio.presentation.adapters.CoinInfoAdapter
 import com.example.testportfolio.databinding.ActivityMainBinding
-import com.example.testportfolio.data.model.CoinPriceInfo
+import com.example.testportfolio.domain.entity.CoinInfo
 import com.example.testportfolio.presentation.ui.CoinDetailActivity
 import com.example.testportfolio.presentation.viewmodel.CoinViewModel
 
@@ -20,11 +20,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val adapter = CoinInfoAdapter(this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
-            override fun onCoinClick(coinPriceInfo: CoinPriceInfo) {
+            override fun onCoinClick(coinInfoDto: CoinInfo) {
                 startActivity(
                     CoinDetailActivity.newIntent(
                         this@MainActivity,
-                        coinPriceInfo.fromSymbol
+                        coinInfoDto.fromSymbol
                     )
                 )
             }
@@ -34,8 +34,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         binding.rvoCoinPriceList.adapter = adapter
         viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
-        viewModel.priceList.observe(this) {
-            adapter.coinPriceInfoList = it
+        viewModel.coinInfoList.observe(this) {
+            adapter.coinInfoDtoList = it
         }
 
 
