@@ -1,4 +1,4 @@
-package com.example.testportfolio.pojo
+package com.example.testportfolio.data.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

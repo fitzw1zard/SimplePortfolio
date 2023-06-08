@@ -1,11 +1,11 @@
-package com.example.testportfolio.database
+package com.example.testportfolio.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.testportfolio.pojo.CoinPriceInfo
+import com.example.testportfolio.data.model.CoinPriceInfo
 
 @Dao
 interface CoinPriceInfoDao {

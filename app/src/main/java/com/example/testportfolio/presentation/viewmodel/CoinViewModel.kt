@@ -1,13 +1,13 @@
-package com.example.testportfolio
+package com.example.testportfolio.presentation.viewmodel
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.example.testportfolio.api.ApiFactory
-import com.example.testportfolio.database.AppDatabase
-import com.example.testportfolio.pojo.CoinPriceInfo
-import com.example.testportfolio.pojo.CoinPriceInfoRawData
+import com.example.testportfolio.data.network.ApiFactory
+import com.example.testportfolio.data.database.AppDatabase
+import com.example.testportfolio.data.model.CoinPriceInfo
+import com.example.testportfolio.data.model.CoinPriceInfoRawData
 import com.google.gson.Gson
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -33,7 +33,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
             .map { it.data?.map { it.coinInfo?.name }?.joinToString(",").orEmpty() }
             .flatMap { ApiFactory.apiService.getFullPriceList(fsyms = it) }
             .map { getPriceListFromRawData(it) }
-            .delaySubscription(10000, TimeUnit.MILLISECONDS)
+            .delaySubscription(60000, TimeUnit.MILLISECONDS)
             .repeat()
             .retry()
             .subscribeOn(Schedulers.io())

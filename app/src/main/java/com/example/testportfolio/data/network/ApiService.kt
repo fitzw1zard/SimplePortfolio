@@ -1,7 +1,7 @@
-package com.example.testportfolio.api
+package com.example.testportfolio.data.network
 
-import com.example.testportfolio.pojo.CoinInfoListOfData
-import com.example.testportfolio.pojo.CoinPriceInfoRawData
+import com.example.testportfolio.data.model.CoinInfoListOfData
+import com.example.testportfolio.data.model.CoinPriceInfoRawData
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

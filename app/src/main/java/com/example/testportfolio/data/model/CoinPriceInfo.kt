@@ -1,8 +1,8 @@
-package com.example.testportfolio.pojo
+package com.example.testportfolio.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.testportfolio.api.ApiFactory.BASE_IMAGE_URL
+import com.example.testportfolio.data.network.ApiFactory.BASE_IMAGE_URL
 import com.example.testportfolio.utils.convertTimestampToTime
 import com.google.gson.annotations.Expose
 

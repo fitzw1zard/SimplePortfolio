@@ -15,10 +15,10 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".CoinDetailActivity"
+            android:name=".presentation.ui.CoinDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".CoinPriceListActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

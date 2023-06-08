@@ -1,4 +1,4 @@
-package com.example.testportfolio
+package com.example.testportfolio.presentation.ui
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.testportfolio.R
 import com.example.testportfolio.databinding.ActivityCoinDetailBinding
+import com.example.testportfolio.presentation.viewmodel.CoinViewModel
 
 
 class CoinDetailActivity : AppCompatActivity() {

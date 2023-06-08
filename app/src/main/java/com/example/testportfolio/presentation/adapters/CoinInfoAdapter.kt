@@ -1,13 +1,13 @@
-package com.example.testportfolio.adapters
+package com.example.testportfolio.presentation.adapters
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testportfolio.R
 import com.example.testportfolio.databinding.ItemCoinInfoBinding
-import com.example.testportfolio.pojo.CoinPriceInfo
+import com.example.testportfolio.data.model.CoinPriceInfo
 import com.squareup.picasso.Picasso
 
 
@@ -35,10 +35,12 @@ class CoinInfoAdapter(private val context: Context) :
 
     override fun onBindViewHolder(holder: CoinInfoViewHolder, position: Int) {
         val coin = coinPriceInfoList[position]
+        Log.d("CallAdapter", "onBindViewHolder")
         val symbolsTemplate = context.resources.getString(R.string.symbols_template)
         val lastUpdateTemplate = context.resources.getString(R.string.last_update_template)
         with(holder) {
-            with(coin) {
+
+            with(coin) { 0
             tvSymbols.text = String.format(symbolsTemplate, fromSymbol, toSymbol)
             tvPrice.text = price
             tvLastUpdate.text = String.format(lastUpdateTemplate, getFormattedTime())
