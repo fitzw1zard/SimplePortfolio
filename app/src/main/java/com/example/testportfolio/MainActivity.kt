@@ -8,7 +8,9 @@ import com.example.testportfolio.presentation.adapters.CoinInfoAdapter
 import com.example.testportfolio.databinding.ActivityMainBinding
 import com.example.testportfolio.domain.entity.CoinInfo
 import com.example.testportfolio.presentation.ui.CoinDetailActivity
+import com.example.testportfolio.presentation.ui.CoinDetailFragment
 import com.example.testportfolio.presentation.viewmodel.CoinViewModel
+import java.text.DateFormatSymbols
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,10 +45,27 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupClickListener() {
         coinInfoAdapter.onCoinClickListener = {
-            val intent = CoinDetailActivity.newIntent(this, it.fromSymbol)
-            startActivity(intent)
+            if (isOnePaneMode()) {
+                launchDetailActivity(it.fromSymbol)
+            } else {
+                launchDetailFragment(it.fromSymbol)
+            }
         }
     }
 
+    private fun isOnePaneMode() = binding.fragmentContainer == null
+
+    private fun launchDetailActivity(fromSymbol: String) {
+        val intent = CoinDetailActivity.newIntent(this@MainActivity, fromSymbol)
+        startActivity(intent)
+    }
+
+    private fun launchDetailFragment(fromSymbol: String) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, CoinDetailFragment.newInstance(fromSymbol))
+            .addToBackStack(null)
+            .commit()
+    }
 
 }
