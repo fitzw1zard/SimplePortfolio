@@ -11,7 +11,7 @@ interface ApiService {
 
     @GET("top/totalvolfull")
     suspend fun getTopCoinsInfo(
-        @Query(QUERY_PARAM_LIMIT) limit: Int = 100,
+        @Query(QUERY_PARAM_LIMIT) limit: Int,
         @Query(QUERY_PARAM_TO_SYMBOL) tSym: String = CURRENCY,
         @Query(QUERY_PARAM_API_KEY) apiKey: String = API_KEY
     ): CoinNamesDto

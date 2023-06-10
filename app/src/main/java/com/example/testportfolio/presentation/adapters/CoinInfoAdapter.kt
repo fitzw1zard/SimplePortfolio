@@ -34,7 +34,6 @@ class CoinInfoAdapter(
             parent,
             false
         )
-
         return CoinInfoViewHolder(binding)
     }
 
