@@ -6,17 +6,19 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.work.ExistingWorkPolicy
 import androidx.work.WorkManager
 import com.example.testportfolio.data.database.AppDatabase
+import com.example.testportfolio.data.database.CoinInfoDao
 import com.example.testportfolio.data.mapper.CoinMapper
 import com.example.testportfolio.data.workers.RefreshDataWorker
 import com.example.testportfolio.domain.entity.CoinInfo
 import com.example.testportfolio.domain.repository.CoinRepository
+import javax.inject.Inject
 
-class CoinRepositoryImpl(
+class CoinRepositoryImpl @Inject constructor(
+    private val mapper: CoinMapper,
+    private val coinInfoDao: CoinInfoDao,
     private val application: Application
 ) : CoinRepository {
 
-    private val coinInfoDao = AppDatabase.getInstance(application).coinInfoDao()
-    private val mapper = CoinMapper()
 
     override fun getCoinInfoList(): LiveData<List<CoinInfo>> =
         MediatorLiveData<List<CoinInfo>>().apply {

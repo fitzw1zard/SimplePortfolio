@@ -1,5 +1,6 @@
 package com.example.testportfolio.presentation.ui
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,21 +11,37 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.testportfolio.MainApp
 import com.example.testportfolio.R
 import com.example.testportfolio.databinding.ActivityCoinDetailBinding
 import com.example.testportfolio.databinding.FragmentCoinDetailBinding
 import com.example.testportfolio.presentation.viewmodel.CoinViewModel
+import com.example.testportfolio.presentation.viewmodel.ViewModelFactory
 import com.squareup.picasso.Picasso
+import javax.inject.Inject
 
 
 class CoinDetailFragment : Fragment() {
+
 
     private var _binding: FragmentCoinDetailBinding? = null
     private val binding
         get() = _binding ?: throw RuntimeException("FragmentCoinDetailBinding == null")
 
-    val viewModel: CoinViewModel by lazy {
-        ViewModelProvider(this)[CoinViewModel::class.java]
+    private val viewModel: CoinViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[CoinViewModel::class.java]
+    }
+
+    private val component by lazy {
+        (requireActivity().application as MainApp).component
+    }
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(
@@ -37,7 +54,7 @@ class CoinDetailFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+             super.onViewCreated(view, savedInstanceState)
         val fromSymbol = getSymbol()
         viewModel.getDetailInfo(fromSymbol).observe(viewLifecycleOwner) {
             with(binding) {

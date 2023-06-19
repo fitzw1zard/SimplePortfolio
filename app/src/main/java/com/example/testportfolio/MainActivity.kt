@@ -10,22 +10,34 @@ import com.example.testportfolio.domain.entity.CoinInfo
 import com.example.testportfolio.presentation.ui.CoinDetailActivity
 import com.example.testportfolio.presentation.ui.CoinDetailFragment
 import com.example.testportfolio.presentation.viewmodel.CoinViewModel
+import com.example.testportfolio.presentation.viewmodel.ViewModelFactory
 import java.text.DateFormatSymbols
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var coinInfoAdapter: CoinInfoAdapter
     private lateinit var binding: ActivityMainBinding
-    private lateinit var viewModel: CoinViewModel
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel: CoinViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[CoinViewModel::class.java]
+    }
+
+    private val component by lazy {
+        (application as MainApp).component
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupRecyclerView()
-        viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
         viewModel.coinInfoList.observe(this) {
             coinInfoAdapter.submitList(it)
         }
