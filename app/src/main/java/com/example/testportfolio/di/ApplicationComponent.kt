@@ -7,6 +7,7 @@ import com.example.testportfolio.presentation.ui.CoinDetailFragment
 import dagger.BindsInstance
 import dagger.Component
 
+@ApplicationScope
 @Component(
     modules = [
         DataModule::class,
