@@ -15,12 +15,13 @@ android {
 
     defaultConfig {
 
+        // API_KEY
         Properties properties = new Properties()
         if (project.rootProject.file('local.properties').canRead()) {
             properties.load(project.rootProject.file("local.properties").newDataInputStream())
         }
-
         buildConfigField "String", "API_KEY", properties.getProperty("API_KEY")
+        //
 
         applicationId "com.example.testportfolio"
         minSdk 29
